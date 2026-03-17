@@ -5,6 +5,8 @@ import com.example.spring_greeting_app.repository.GreetingRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class GreetingService {
 
@@ -17,6 +19,13 @@ public class GreetingService {
         greeting.setMessage(message);
 
         return repository.save(greeting);
+    }
+    public Greeting findGreetingById(Long id) {
+        return repository.findById(id).orElse(null);
+    }
+
+    public List<Greeting> getAllGreetings() {
+        return repository.findAll();
     }
 
 }
