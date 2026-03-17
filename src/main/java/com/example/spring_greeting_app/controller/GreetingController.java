@@ -1,21 +1,21 @@
 package com.example.spring_greeting_app.controller;
 
+import com.example.spring_greeting_app.model.Greeting;
 import com.example.spring_greeting_app.service.GreetingService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
+@RequestMapping("/greeting")
 public class GreetingController {
 
     @Autowired
-    GreetingService service;
+    private GreetingService service;
 
-    @GetMapping("/greeting")
-    public String greeting(
-            @RequestParam(required=false) String firstName,
-            @RequestParam(required=false) String lastName){
+    @PostMapping
+    public Greeting saveGreeting(@RequestBody Greeting greeting) {
 
-        return service.getGreeting(firstName,lastName);
+        return service.saveGreeting(greeting.getMessage());
     }
-
 }

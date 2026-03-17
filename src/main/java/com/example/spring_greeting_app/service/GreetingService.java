@@ -1,22 +1,22 @@
 package com.example.spring_greeting_app.service;
 
+import com.example.spring_greeting_app.model.Greeting;
+import com.example.spring_greeting_app.repository.GreetingRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class GreetingService {
 
-    public String getGreeting(String firstName,String lastName){
+    @Autowired
+    private GreetingRepository repository;
 
-        if(firstName!=null && lastName!=null)
-            return "Hello "+firstName+" "+lastName;
+    public Greeting saveGreeting(String message) {
 
-        if(firstName!=null)
-            return "Hello "+firstName;
+        Greeting greeting = new Greeting();
+        greeting.setMessage(message);
 
-        if(lastName!=null)
-            return "Hello "+lastName;
-
-        return "Hello World";
+        return repository.save(greeting);
     }
 
 }
